@@ -9,7 +9,7 @@ public class Car {
     private int n_seats;
 
 
-    private static int num_cars = 0; //Tendra que incrementarse cada vez que creemos un coche
+    private static int num_cars = 0; //Tendrá que incrementarse cada vez que creemos un coche
     private final static int MAX_CARS = 5;
 
     public Car() //throws Exception
@@ -73,7 +73,7 @@ public class Car {
     }
 
     public void setroof(boolean roof) {
-        this.roof = Car.this.roof;
+        this.roof = roof;
     }
 
     public void setKm(int km) {
@@ -81,11 +81,11 @@ public class Car {
     }
 
     public void setn_doors(int n_doors) {
-        this.n_doors = Car.this.n_doors;
+        this.n_doors = n_doors;
     }
 
     public void setn_seats(int n_seats) {
-        this.n_seats = Car.this.n_seats;
+        this.n_seats = n_seats;
     }
 
     public static boolean cars_capacity () {

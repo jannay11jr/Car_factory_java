@@ -1,4 +1,7 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Auxiliary {
     private Scanner keyboard = new Scanner(System.in);
@@ -18,48 +21,44 @@ public class Auxiliary {
                     "7. Avanzar kilometros\n" +
                     "8. Mostrar caracteristicas de un coche\n" +
                     "9. Salir del programa");
+            try {
 
             option = keyboard.nextInt();
             switch (option) {
                 case 1:
-                    if(freeCapacity() == true) {
+                    if (freeCapacity() == true) {
                         try {
                             addCarUsingLicensePlate();
                             System.out.println(f.showLastCar());
-                        }
-                        catch (Exception e) {
+                        } catch (Exception e) {
                             System.out.println(e.getMessage());
                         }
-                    }
-                    else {
-                        System.out.println("No se pueden fabricar mas coches, espacio lleno.");
+                    } else {
+                        System.out.println("No se pueden fabricar más coches, espacio lleno.");
                     }
                     break;
                 case 2:
                     if (freeCapacity() == true) {
                         addCarUsingDoorsSeats();
                         System.out.println(f.showLastCar());
-                    }
-                    else {
-                        System.out.println("No se pueden fabricar mas coches, espacio lleno");
+                    } else {
+                        System.out.println("No se pueden fabricar más coches, espacio lleno");
                     }
                     break;
                 case 3:
                     if (freeCapacity() == true) {
                         addCarUsingBrandModelColor();
                         System.out.println(f.showLastCar());
-                    }
-                    else {
-                        System.out.println("No se pueden fabricar mas coches, espacio lleno");
+                    } else {
+                        System.out.println("No se pueden fabricar más coches, espacio lleno");
                     }
                     break;
                 case 4:
                     if (freeCapacity() == true) {
                         f.createCar();
                         System.out.println(f.showLastCar());
-                    }
-                    else {
-                        System.out.println("No se pueden fabricar mas coches, espacio lleno");
+                    } else {
+                        System.out.println("No se pueden fabricar más coches, espacio lleno");
                     }
                     break;
                 case 5:
@@ -81,10 +80,15 @@ public class Auxiliary {
                     System.out.println();
                     System.out.println("Error. Tienes que seleccionar un numero entre 1 y 9");
                     System.out.println();
+                }
 
             }
+            catch (InputMismatchException e) {
+                System.out.println("No has introducido un carácter válido, ¡solo números!");
+                keyboard.next();
+            }
         }
-        while (option != 9); // Si esto es distinto de nueve volvera al do y se ejecutara de nuevo
+        while (option != 9); // Si esto es distinto de nueve volvera al do y se ejecutará de nuevo
 
     }
     public boolean freeCapacity() {
@@ -92,10 +96,27 @@ public class Auxiliary {
     }
     public void addCarUsingLicensePlate()throws Exception {
         String licensePlate;
-        System.out.println("Dime la matricula");
-        licensePlate = keyboard.next();
-        f.createCar(licensePlate);
+        try {
+            System.out.println("Dime la matricula (debe contener cuatro números seguido de tres letras)");
+            licensePlate = keyboard.next();
 
+            //Para validar la matricula
+            Pattern p = Pattern.compile("\\d{4}[a-zA-Z]{3}");
+            Matcher m = p.matcher(licensePlate);
+
+            if (m.matches()){
+                f.createCar(licensePlate);
+            }
+            else {
+                System.out.println("Has introducido un formato de matricula inválido, debe contener cuatro números seguido de tres letras, sin caracteres especiales");
+                System.out.println("Hasta la próxima! :(");
+                System.exit(0);
+            }
+
+        }
+        catch (InputMismatchException e) {
+            System.out.print("Hemos terminado :(");
+        }
     }
 
     public void addCarUsingDoorsSeats() {
@@ -115,7 +136,7 @@ public class Auxiliary {
 
         System.out.println("Dime marca");
         brand = keyboard.next();
-        System.out.println("Dime model");
+        System.out.println("Dime modelo");
         model = keyboard.next();
         System.out.println("Dime color");
         color = keyboard.next();

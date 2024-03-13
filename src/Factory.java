@@ -1,3 +1,5 @@
+import java.util.regex.Pattern;
+
 public class Factory {
         private static Car[] cars;
 
@@ -34,7 +36,10 @@ public class Factory {
 
         public void createCar(String brand, String model, String color) {
             String licensePlate = licensePlate_rand();
-            Car c = new Car(licensePlate, model, color);
+            Car c = new Car(licensePlate);
+            c.setbrand(brand);
+            c.setmodel(model);
+            c.setColor(color);
             saveCar(c);
         }
 
@@ -93,16 +98,22 @@ public class Factory {
         }
 
         public static String licensePlate_rand() {
+            Pattern p = Pattern.compile("\\d{4}[a-zA-Z]{3}");
             String licensePlate_total = "";
+
             do {
                 int n_licensePlate;
                 licensePlate_total = "";
-                for (int i = 0; i < 5; i++) {
+
+                for (int i = 0; i < 4; i++) {
                     n_licensePlate = (int) (Math.random() * 10);
                     licensePlate_total += n_licensePlate;
                 }
-            }
-            while(checklicensePlateRepeat(licensePlate_total) == true);
+                for (int i = 0; i < 3; i++) {
+                    char letter = (char) ('A' + Math.random() * ('Z' - 'A' + 1));
+                    licensePlate_total += letter;
+                }
+            } while(!p.matcher(licensePlate_total).matches() || checklicensePlateRepeat(licensePlate_total) == true);
             return licensePlate_total;
         }
 
