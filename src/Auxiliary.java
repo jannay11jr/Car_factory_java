@@ -34,7 +34,7 @@ public class Auxiliary {
                             System.out.println(e.getMessage());
                         }
                     } else {
-                        System.out.println("No se pueden fabricar más coches, espacio lleno.");
+                        System.out.println("No se pueden fabricar más coches, espacio lleno. \n");
                     }
                     break;
                 case 2:
@@ -42,7 +42,7 @@ public class Auxiliary {
                         addCarUsingDoorsSeats();
                         System.out.println(f.showLastCar());
                     } else {
-                        System.out.println("No se pueden fabricar más coches, espacio lleno");
+                        System.out.println("No se pueden fabricar más coches, espacio lleno. \n");
                     }
                     break;
                 case 3:
@@ -50,7 +50,7 @@ public class Auxiliary {
                         addCarUsingBrandModelColor();
                         System.out.println(f.showLastCar());
                     } else {
-                        System.out.println("No se pueden fabricar más coches, espacio lleno");
+                        System.out.println("No se pueden fabricar más coches, espacio lleno. \n");
                     }
                     break;
                 case 4:
@@ -58,7 +58,7 @@ public class Auxiliary {
                         f.createCar();
                         System.out.println(f.showLastCar());
                     } else {
-                        System.out.println("No se pueden fabricar más coches, espacio lleno");
+                        System.out.println("No se pueden fabricar más coches, espacio lleno. \n");
                     }
                     break;
                 case 5:
@@ -78,13 +78,13 @@ public class Auxiliary {
 
                 default:
                     System.out.println();
-                    System.out.println("Error. Tienes que seleccionar un numero entre 1 y 9");
+                    System.out.println("Error. Tienes que seleccionar un numero entre 1 y 9 \n");
                     System.out.println();
                 }
 
             }
             catch (InputMismatchException e) {
-                System.out.println("No has introducido un carácter válido, ¡solo números!");
+                System.out.println("[ERROR]: No has introducido un carácter válido. \n");
                 keyboard.next();
             }
         }
@@ -124,11 +124,31 @@ public class Auxiliary {
         int n_seats;
 
         System.out.println("Dime num puertas: ");
-        n_doors = keyboard.nextInt();
-
+        if(keyboard.hasNextInt()) {
+            n_doors = keyboard.nextInt();
+        }
+        else {
+            System.out.println("Entrada no válida, debes ingresar un número.");
+            return;
+        }
         System.out.println("Dime num plazas: ");
-        n_seats = keyboard.nextInt();
-        f.createCar(n_seats,n_doors);
+        if(keyboard.hasNextInt()) {
+            n_seats = keyboard.nextInt();
+        }
+        else {
+            System.out.println("Entrada no válida, debes ingresar un número.");
+            return;
+        }
+
+        if (2 <= n_doors && n_doors < 8 && 2 <= n_seats && n_seats < 10) {
+            f.createCar(n_seats, n_doors);
+        }
+        else {
+            System.out.println("El nº de puertas o plazas introducido es incorrecto. No se creará el vehiculo");
+            System.out.println("El nº de puertas debe de ser mayor que uno y menor que ocho");
+            System.out.println("El nº de plazas debe de ser mayor que uno y menor que diez");
+            System.exit(0);
+        }
     }
 
     public void addCarUsingBrandModelColor () {
@@ -140,6 +160,12 @@ public class Auxiliary {
         model = keyboard.next();
         System.out.println("Dime color");
         color = keyboard.next();
+
+        if (!color.matches("[a-zA-Z]+")){
+        System.out.println("Has introducido un caracter no válido para el color");
+        return;
+        }
+
         f.createCar(brand, model, color);
     }
 
@@ -155,21 +181,22 @@ public class Auxiliary {
         int n_seats;
 
         System.out.println("Introduce matricula del coche que quieres personalizar: ");
-        licensePlate = Auxiliary.this.keyboard.next();
+        licensePlate = keyboard.next().toUpperCase();
         System.out.println("Introduce marca: ");
-        brand = Auxiliary.this.keyboard.next();
+        brand = keyboard.next();
         System.out.println("Introduce modelo: ");
-        model = Auxiliary.this.keyboard.next();
+        model = keyboard.next();
         System.out.println("Introduce color: ");
-        color = Auxiliary.this.keyboard.next();
+        color = keyboard.next();
+
         System.out.println("Introduce si tiene techo: (Escribe true o false) ");
-        roof = Auxiliary.this.keyboard.nextBoolean();
+        roof = keyboard.nextBoolean();
         System.out.println("Introduce km: ");
-        km = Auxiliary.this.keyboard.nextInt();
+        km = keyboard.nextInt();
         System.out.println("Introduce numero de puertas: ");
-        n_doors = Auxiliary.this.keyboard.nextInt();
+        n_doors = keyboard.nextInt();
         System.out.println("Introduce numero de plazas: ");
-        n_seats = Auxiliary.this.keyboard.nextInt();
+        n_seats = keyboard.nextInt();
         try {
             f.personalizeCar(licensePlate, brand, model, color, roof, km, n_doors, n_seats);
             System.out.println(f.obtainInfo(licensePlate));

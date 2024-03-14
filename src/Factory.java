@@ -19,6 +19,8 @@ public class Factory {
         public void createCar(String licensePlate)throws Exception {
             if (checklicensePlateRepeat(licensePlate) == false) {
                 Car c = new Car(licensePlate);
+                c.setn_doors(4);
+                c.setn_seats(5);
                 saveCar(c);
             }
             else {
