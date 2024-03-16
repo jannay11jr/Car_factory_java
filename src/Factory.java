@@ -19,8 +19,11 @@ public class Factory {
         public void createCar(String licensePlate)throws Exception {
             if (checklicensePlateRepeat(licensePlate) == false) {
                 Car c = new Car(licensePlate);
+                c.setColor("negro");
                 c.setn_doors(4);
                 c.setn_seats(5);
+                c.setbrand("Ferrari");
+                c.setmodel("812 GTS");
                 saveCar(c);
             }
             else {
@@ -31,6 +34,9 @@ public class Factory {
         public void createCar(int n_seats, int n_doors) {
             String licensePlate = licensePlate_rand();
             Car c = new Car(licensePlate);
+            c.setbrand("Ferrari");
+            c.setmodel("812 GTS");
+            c.setColor("negro");
             c.setn_seats(n_seats);
             c.setn_doors(n_doors);
             saveCar(c);
@@ -42,12 +48,19 @@ public class Factory {
             c.setbrand(brand);
             c.setmodel(model);
             c.setColor(color);
+            c.setn_doors(4);
+            c.setn_seats(5);
             saveCar(c);
         }
 
         public void createCar() {
             String licensePlate = licensePlate_rand();
             Car c = new Car (licensePlate);
+            c.setColor("negro");
+            c.setmodel("812 GTS");
+            c.setbrand("Ferrari");
+            c.setn_doors(4);
+            c.setn_seats(5);
             saveCar(c);
         }
 

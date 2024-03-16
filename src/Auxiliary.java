@@ -170,33 +170,33 @@ public class Auxiliary {
     }
 
     public void personalizeColor () {
-        Scanner keyboard = new Scanner (System.in);
-        String licensePlate="";
-        String brand;
-        String model;
-        String color;
-        boolean roof;
-        int km;
-        int n_doors;
-        int n_seats;
+            Scanner keyboard = new Scanner (System.in);
+            String licensePlate="";
+            String brand;
+            String model;
+            String color;
+            boolean roof;
+            int km;
+            int n_doors;
+            int n_seats;
 
-        System.out.println("Introduce matricula del coche que quieres personalizar: ");
-        licensePlate = keyboard.next().toUpperCase();
-        System.out.println("Introduce marca: ");
-        brand = keyboard.next();
-        System.out.println("Introduce modelo: ");
-        model = keyboard.next();
-        System.out.println("Introduce color: ");
-        color = keyboard.next();
+            System.out.println("Introduce matricula del coche que quieres personalizar: ");
+            licensePlate = keyboard.next();
+            System.out.println("Introduce marca: ");
+            brand = keyboard.next();
+            System.out.println("Introduce modelo: ");
+            model = keyboard.next();
+            System.out.println("Introduce color: ");
+            color = keyboard.next();
 
-        System.out.println("Introduce si tiene techo: (Escribe true o false) ");
-        roof = keyboard.nextBoolean();
-        System.out.println("Introduce km: ");
-        km = keyboard.nextInt();
-        System.out.println("Introduce numero de puertas: ");
-        n_doors = keyboard.nextInt();
-        System.out.println("Introduce numero de plazas: ");
-        n_seats = keyboard.nextInt();
+            System.out.println("Introduce si tiene techo: (Escribe true o false) ");
+            roof = keyboard.nextBoolean();
+            System.out.println("Introduce km: ");
+            km = keyboard.nextInt();
+            System.out.println("Introduce numero de puertas: ");
+            n_doors = keyboard.nextInt();
+            System.out.println("Introduce numero de plazas: ");
+            n_seats = keyboard.nextInt();
         try {
             f.personalizeCar(licensePlate, brand, model, color, roof, km, n_doors, n_seats);
             System.out.println(f.obtainInfo(licensePlate));
