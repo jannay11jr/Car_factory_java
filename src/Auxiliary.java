@@ -99,6 +99,8 @@ public class Auxiliary {
         try {
             System.out.println("Dime la matricula (debe contener cuatro números seguido de tres letras)");
             licensePlate = keyboard.next();
+            licensePlate = licensePlate.toUpperCase();
+
 
             //Para validar la matricula
             Pattern p = Pattern.compile("\\d{4}[a-zA-Z]{3}");
@@ -182,28 +184,37 @@ public class Auxiliary {
 
             System.out.println("Introduce matricula del coche que quieres personalizar: ");
             licensePlate = keyboard.next();
+            licensePlate = licensePlate.toUpperCase();
             System.out.println("Introduce marca: ");
             brand = keyboard.next();
             System.out.println("Introduce modelo: ");
             model = keyboard.next();
             System.out.println("Introduce color: ");
             color = keyboard.next();
+            color = color.toLowerCase();
+            if (color.equals("rojo") || color.equals("verde") || color.equals("amarillo") || color.equals("azul") || color.equals("negro") || color.equals("blanco")
+                || color.equals("gris") || color.equals("rojo") || color.equals("naranja")) {
+                System.out.println("Introduce si tiene techo: (Escribe true o false) ");
+                roof = keyboard.nextBoolean();
+                System.out.println("Introduce km: ");
+                km = keyboard.nextInt();
+                System.out.println("Introduce numero de puertas: ");
+                n_doors = keyboard.nextInt();
+                System.out.println("Introduce numero de plazas: ");
+                n_seats = keyboard.nextInt();
 
-            System.out.println("Introduce si tiene techo: (Escribe true o false) ");
-            roof = keyboard.nextBoolean();
-            System.out.println("Introduce km: ");
-            km = keyboard.nextInt();
-            System.out.println("Introduce numero de puertas: ");
-            n_doors = keyboard.nextInt();
-            System.out.println("Introduce numero de plazas: ");
-            n_seats = keyboard.nextInt();
-        try {
-            f.personalizeCar(licensePlate, brand, model, color, roof, km, n_doors, n_seats);
-            System.out.println(f.obtainInfo(licensePlate));
-        }
-        catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
+
+                try {
+                    f.personalizeCar(licensePlate, brand, model, color, roof, km, n_doors, n_seats);
+                    System.out.println(f.obtainInfo(licensePlate));
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+            else {
+                System.out.println("[ERROR]: Color no válido, disculpe, no podemos fabricar un coche de ese color");
+                System.exit(0);
+            }
     }
 
 
@@ -219,6 +230,7 @@ public class Auxiliary {
 
         System.out.println("Introduce matricula del coche que quieres personalizar: ");
         licensePlate = Auxiliary.this.keyboard.next();
+        licensePlate = licensePlate.toUpperCase();
         System.out.println("Introduce marca: ");
         brand = Auxiliary.this.keyboard.next();
         System.out.println("Introduce modelo: ");
@@ -246,6 +258,7 @@ public class Auxiliary {
 
         System.out.println("Dame la matricula");
         licensePlate = keyboard.next();
+        licensePlate = licensePlate.toUpperCase();
         System.out.println("Dime numeros de km nuevo");
         km = keyboard.nextInt();
         try{
@@ -260,7 +273,7 @@ public class Auxiliary {
     public void showFeatures() {
         String licensePlate;
         System.out.println("Dame la matricula");
-        licensePlate = keyboard.next();
+        licensePlate = keyboard.next().toUpperCase();
         System.out.println(f.obtainInfo(licensePlate));
     }
 }
